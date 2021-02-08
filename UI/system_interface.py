@@ -58,7 +58,7 @@ class Game_System:
         return self.mouse_position, mouse_click
 
     #--키보드 값 입력
-    def get_key_input(self, text=""):
+    def get_key_input(self, text="", encrypt=False):
         """
         키보드 입력 값을 받아옴
         text값이 있을 때는 text에 입력된 값을 추가하여 return,
@@ -71,7 +71,7 @@ class Game_System:
             # 키보드 인터페이스
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_BACKSPACE:
-                    user_text = text[:-1]
+                    text = text[:-1]
                 else:
                     text += event.unicode
 

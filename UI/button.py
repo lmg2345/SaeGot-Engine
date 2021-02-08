@@ -1,8 +1,8 @@
 import pygame
+import os
 
 
-
-# 추상 버튼 클래스
+# 추상 버튼 클래스---------------------------------------------------------------------------------------------------------
 class Rectangle_Center:
     position = [0, 0]
     size = [0, 0]
@@ -18,13 +18,13 @@ class Rectangle_Center:
         self.size[1] = button_size[1]
         self.center = None
         self.active = False
-
+        module_path = os.path.dirname(__file__)
         if button_image_path == None:
-            button_image_path = "pic/default_button.png"
+            button_image_path = os.path.join(module_path, "./pic/default_button.png")
         if button_cliked_image_path == None:
-            button_cliked_image_path = "pic/default_button_clicked.png"
+            button_cliked_image_path = os.path.join(module_path, "./pic/default_button_clicked.png")
         if button_active_image_path == None:
-            button_active_image_path = "pic/default_button_active.png"
+            button_active_image_path = os.path.join(module_path, "./pic/default_button_active.png")
 
         self.image = pygame.image.load(button_image_path)
         self.image = pygame.transform.scale(self.image, [self.size[0], self.size[1]])
@@ -78,12 +78,6 @@ class Rectangle_Center:
         if check1:
             screen.blit(self.image_active, self.center)
 
-
-
-
-
-
-
     #--마우스 위치 확인
     def check_mouse_position(self, mouse_position):
         if mouse_position != None:
@@ -102,14 +96,14 @@ class Rectangle_Center:
         return False
 
 
-# 글자 버튼 클래스
+# 글자 버튼 클래스---------------------------------------------------------------------------------------------------------
 class Text_Button(Rectangle_Center):
     font = None
     text_render = None
     text = ""
     text_center = None
     text_color = [0,0,0]
-    def __init__(self, button_size, text = "", text_size = 30, text_color = [0,0,0], button_image_path = None, \
+    def __init__(self, button_size, text = "", text_size = 30, text_color = None, button_image_path = None,
                  button_cliked_image_path = None, button_active_image_path = None):
         """
         글자 버튼 클래스
@@ -120,6 +114,10 @@ class Text_Button(Rectangle_Center):
         :param text_color:      글자 색 - [r, g, b] | [0, 0, 0]
         :param button_image_path:    버튼 이미지 경로 - 문자열 | None
         """
+        if text_color is None:
+            text_color = [0,0,0]
+
+
         self.text_center = None
         super().__init__(button_size, button_image_path, button_cliked_image_path, button_active_image_path)
         self.font = pygame.font.Font(None, text_size)  # 폰트 설정
