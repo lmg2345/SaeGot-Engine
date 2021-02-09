@@ -36,11 +36,11 @@ def main():
         Game.set_event()
         Game.exit()
         mouse, click = Game.get_mouse_input()
-        if ID_Button.active:
+        if ID_Button.get_active():
             ID_text = Game.get_key_input(ID_text)
             ID_Button.set_text(ID_text)
 
-        if PW_Button.active:
+        if PW_Button.get_active():
             PW_text = Game.get_key_input(PW_text)
             PW_Button.set_text(PW_text)
 
@@ -55,8 +55,8 @@ def main():
             ID_Button.set_active(False)
             PW_Button.set_active(True)
 
-        ID_Button.show_button(window_screen, mouse, click)
-        PW_Button.show_button(window_screen, mouse, click)
+        ID_Button.show(window_screen, mouse, click)
+        PW_Button.show(window_screen, mouse, click)
 
 
         clock.tick(60)

@@ -22,7 +22,7 @@ def main():
 
         card1.set_position([200, 200])
 
-        card1.show_button(window_screen, mouse, click)
+        card1.show(window_screen, mouse, click)
 
         clock.tick(60)
         pygame.display.update()
