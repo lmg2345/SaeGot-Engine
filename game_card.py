@@ -22,18 +22,18 @@ def main():
     Life_Button_width = 150
     Life_button_height = 150
 
-    Player_1__Life_0 = button.Text_Button([Life_Button_width, Life_button_height])
-    Player_1__Life_1 = button.Text_Button([Life_Button_width, Life_button_height])
-    Player_1__Life_2 = button.Text_Button([Life_Button_width, Life_button_height])
-    Player_1__Life = [Player_1__Life_0, Player_1__Life_1, Player_1__Life_2]
-    for i, life in enumerate(Player_1__Life):
+    Player_1__Life = {}
+    for i in range(3):
+        Player_1__Life[i] = button.Text_Button([Life_Button_width, Life_button_height])
+
+    for i, life in Player_1__Life.items():
         life.set_text(Player_1.get_life(i))
 
-    Player_2__Life_0 = button.Text_Button([Life_Button_width, Life_button_height])
-    Player_2__Life_1 = button.Text_Button([Life_Button_width, Life_button_height])
-    Player_2__Life_2 = button.Text_Button([Life_Button_width, Life_button_height])
-    Player_2__Life = [Player_2__Life_0, Player_2__Life_1, Player_2__Life_2]
-    for i, life in enumerate(Player_2__Life):
+    Player_2__Life = {}
+    for i in range(3):
+        Player_2__Life[i] = button.Text_Button([Life_Button_width, Life_button_height])
+
+    for i, life in Player_2__Life.items():
         life.set_text(Player_2.get_life(i))
 
 
@@ -50,16 +50,16 @@ def main():
         mouse, click = Game.get_mouse_input()
 
         Card_1.set_position([200, 200])
-        for i, life in enumerate(Player_1__Life):
+        for i, life in Player_1__Life.items():
             life.set_position([(i+1)*window_width//4, 4*window_height//6])
-        for i, life in enumerate(Player_2__Life):
+        for i, life in Player_2__Life.items():
             life.set_position([(i+1)*window_width//4, 2*window_height//6])
 
         window_screen.fill([150, 230, 220])
         Card_1.show(window_screen, mouse, click)
-        for life in Player_1__Life:
+        for _, life in Player_1__Life.items():
             life.show(window_screen, text_pos_shift = [0, -Life_button_height//2])
-        for life in Player_2__Life:
+        for _, life in Player_2__Life.items():
             life.show(window_screen, text_pos_shift = [0, -Life_button_height//2])
 
         clock.tick(60)
