@@ -159,7 +159,7 @@ class Text_Button(Rectangle_Center):
             text_color = [0,0,0]
 
 
-        self.text_center = None
+        self._text_center = None
         super().__init__(button_size, button_image_path, button_cliked_image_path, button_active_image_path)
         self._font = pygame.font.Font(None, text_size)  # 폰트 설정
         self._text_color = text_color
@@ -178,7 +178,7 @@ class Text_Button(Rectangle_Center):
         self._text_center.center = self._position
 
     #--버튼 그리기
-    def show(self, screen, mouse_position = None, mouse_click = None):
+    def show(self, screen, mouse_position = None, mouse_click = None, text_pos_shift = None):
         """
         화면에 버튼 그리기
 
@@ -186,7 +186,14 @@ class Text_Button(Rectangle_Center):
         """
         super().show(screen, mouse_position, mouse_click)
         self._text_render = self._font.render(self._text, True, self._text_color)  # 텍스트가 표시된 Surface 를 만듬
-        screen.blit(self._text_render, self._text_center)
+
+        if text_pos_shift is None:
+            screen.blit(self._text_render, self._text_center)
+        else:
+            text_pos = [0, 0]
+            text_pos[0] = self._text_center[0] + text_pos_shift[0]
+            text_pos[1] = self._text_center[1] + text_pos_shift[1]
+            screen.blit(self._text_render, text_pos)
 
     # --글자 설정
     def set_text(self, text):
@@ -195,4 +202,11 @@ class Text_Button(Rectangle_Center):
         
         :param text:    글자 - 문자열
         """
+        #타입 변환
+        if(str(type(text))!="<class 'str'>"):
+            try:
+                text = str(text)
+            except:
+                print("타입 변환 문제 발생")
+
         self._text = text
