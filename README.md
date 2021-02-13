@@ -1,2 +1,2 @@
 # SaeGot-Engine
-# 2021-02-13 SaeGot으로 
+# 2021-02-13 SaeGot으로 이전
